@@ -1,5 +1,5 @@
 /* =============================================================
- * EL PIBE ⚽ — Sistema de Caja y Control de Fiados
+ * GIAFER y JOAKO 🛖 — Sistema de Caja y Control de Fiados
  * Archivo  : js/app.js
  * Propósito: Controlador JS único compartido por todas las páginas.
  *
@@ -436,9 +436,9 @@ function handleCierreCaja() {
   const totalCash       = state.wallets.efectivo + state.wallets.yape + state.wallets.plin;
 
   const resumen = [
-    '══════════════════════════════════',
-    '     CIERRE DE CAJA — EL PIBE ⚽  ',
-    '══════════════════════════════════',
+    '══════════════════════════════════════════',
+    '     CIERRE DE CAJA — GIAFER y JOAKO 🛖   ',
+    '══════════════════════════════════════════',
     `  💵 Efectivo : ${formatCurrency(state.wallets.efectivo)}`,
     `  🔮 Yape     : ${formatCurrency(state.wallets.yape)}`,
     `  📱 Plin     : ${formatCurrency(state.wallets.plin)}`,
@@ -458,7 +458,7 @@ function handleCierreCaja() {
     state.transactions = [];
     saveState(state);
     renderDashboard();
-    showToast('✅ Caja reseteada. ¡Lista para una nueva jornada! ⚽', 'success');
+    showToast('✅ Caja reseteada. ¡Lista para una nueva jornada! 🛖', 'success');
   }
 }
 
