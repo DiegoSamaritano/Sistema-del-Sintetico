@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Pibe ⚽ — Registro de Ventas</title>
+  <link rel="stylesheet" href="css/ventas.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BARRA DE NAVEGACIÓN PRINCIPAL
+       ═══════════════════════════════════════════════════════ -->
+  <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <div class="navbar-brand">
+      <span aria-hidden="true">⚽</span>
+      <span>El Pibe</span>
+    </div>
+
+    <button
+      id="navToggle"
+      class="nav-toggle"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="navbarMenu"
+    >☰</button>
+
+    <div id="navbarMenu" class="navbar-menu">
+      <a href="index.html"  class="nav-link">📊 Caja</a>
+      <a href="ventas.html" class="nav-link">🛒 Ventas</a>
+      <a href="deudas.html" class="nav-link">📋 Fiados</a>
+      <button id="logoutBtn" class="btn-logout">🚪 Salir</button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CONTENIDO PRINCIPAL
+       ═══════════════════════════════════════════════════════ -->
+  <main class="main-content">
+
+    <header class="page-header">
+      <h2 class="page-title">Registro de Ventas</h2>
+      <p class="page-subtitle">
+        Registra ventas de productos, alquiler de cancha o cualquier ingreso.
+        Para alquiler, describe el texto (Ej: "Alquiler cancha – Daniel") y el monto acordado.
+      </p>
+    </header>
+
+    <!-- ─── FORMULARIO DE NUEVA VENTA ─── -->
+    <section class="form-section">
+      <h3 class="section-title">Nueva Venta</h3>
+
+      <form id="ventasForm" class="venta-form" novalidate>
+
+        <!-- Descripción del producto o servicio -->
+        <div class="form-group">
+          <label for="saleDescription">Descripción del producto / servicio</label>
+          <input
+            type="text"
+            id="saleDescription"
+            name="saleDescription"
+            placeholder="Ej: Gaseosa 1L · Alquiler cancha completa – Daniel · Snack..."
+            autocomplete="off"
+            required
+          >
+        </div>
+
+        <!-- Monto -->
+        <div class="form-group">
+          <label for="saleAmount">Monto (S/)</label>
+          <input
+            type="number"
+            id="saleAmount"
+            name="saleAmount"
+            placeholder="0.00"
+            min="0.01"
+            step="0.01"
+            required
+          >
+        </div>
+
+        <!-- Selector de método de pago (radio buttons grandes para tacto fácil) -->
+        <fieldset class="payment-fieldset">
+          <legend>Método de Pago</legend>
+
+          <div class="payment-options">
+
+            <label class="payment-option" for="pm-efectivo">
+              <input
+                type="radio"
+                id="pm-efectivo"
+                name="paymentMethod"
+                value="efectivo"
+              >
+              <span class="payment-option-inner">
+                <span class="payment-option-icon">💵</span>
+                <span class="payment-option-label">Efectivo</span>
+              </span>
+            </label>
+
+            <label class="payment-option" for="pm-yape">
+              <input
+                type="radio"
+                id="pm-yape"
+                name="paymentMethod"
+                value="yape"
+              >
+              <span class="payment-option-inner">
+                <span class="payment-option-icon">🔮</span>
+                <span class="payment-option-label">Yape</span>
+              </span>
+            </label>
+
+            <label class="payment-option" for="pm-plin">
+              <input
+                type="radio"
+                id="pm-plin"
+                name="paymentMethod"
+                value="plin"
+              >
+              <span class="payment-option-inner">
+                <span class="payment-option-icon">📱</span>
+                <span class="payment-option-label">Plin</span>
+              </span>
+            </label>
+
+            <label class="payment-option payment-option--fiado" for="pm-fiado">
+              <input
+                type="radio"
+                id="pm-fiado"
+                name="paymentMethod"
+                value="fiado"
+              >
+              <span class="payment-option-inner">
+                <span class="payment-option-icon">📋</span>
+                <span class="payment-option-label">Fiado</span>
+              </span>
+            </label>
+
+          </div><!-- /payment-options -->
+        </fieldset>
+
+        <!-- Selector de deudor (solo visible cuando se elige "Fiado") -->
+        <!-- app.js → onPaymentMethodChange() controla la visibilidad de este bloque -->
+        <div id="debtorGroup" class="form-group hidden">
+          <label for="debtorSelect">
+            👤 Seleccionar deudor <span class="required-mark">(obligatorio para Fiado)</span>
+          </label>
+          <select id="debtorSelect" name="debtorSelect">
+            <option value="">— Seleccionar deudor —</option>
+          </select>
+          <p class="field-hint">
+            ¿No aparece el nombre?
+            <a href="deudas.html">Regístralo primero en Fiados →</a>
+          </p>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          ✅ Registrar Venta
+        </button>
+
+      </form>
+    </section>
+
+    <!-- ─── LISTADO DE VENTAS RECIENTES ─── -->
+    <section class="historial-section">
+      <h3 class="section-title">Ventas Recientes</h3>
+      <!-- app.js → renderRecentSales() llena este contenedor dinámicamente -->
+      <div id="recentSalesContainer" class="sales-list">
+        <p class="empty-msg">📭 Aún no hay ventas registradas.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

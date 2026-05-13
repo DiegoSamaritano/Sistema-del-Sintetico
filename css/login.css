@@ -1,0 +1,404 @@
+/* =============================================================
+ * GIAFER y JOAKO — css/login.css
+ * Pantalla de inicio de sesión — Diseño profesional Dark Mode
+ * ============================================================= */
+
+/* ─────────────────────────────────────────────────────────────
+ * VARIABLES CSS (Paleta Dark Mode)
+ * ───────────────────────────────────────────────────────────── */
+:root {
+  --bg-base:        #080c10;
+  --bg-card:        #0f1419;
+  --bg-input:       #0a0e13;
+  --border:         #1e2733;
+  --border-focus:   #3fb950;
+  --text-primary:   #e8edf3;
+  --text-secondary: #7d8fa3;
+  --text-muted:     #4a5568;
+  --color-green:    #3fb950;
+  --color-green-lt: #56d364;
+  --color-danger:   #f85149;
+  --radius:         14px;
+  --radius-sm:      9px;
+  --radius-xs:      6px;
+  --shadow-glow:    0 0 60px rgba(63, 185, 80, 0.08);
+  --shadow-card:    0 24px 80px rgba(0, 0, 0, 0.7),
+                    0 0 0 1px rgba(255, 255, 255, 0.03);
+  --shadow-focus:   0 0 0 3px rgba(63, 185, 80, 0.25);
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * RESET
+ * ───────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin:     0;
+  padding:    0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * BODY — Fondo animado con orbe de luz
+ * ───────────────────────────────────────────────────────────── */
+body {
+  font-family:      system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-base);
+  color:            var(--text-primary);
+  min-height:       100vh;
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  padding:          1rem;
+  -webkit-tap-highlight-color: transparent;
+  /* Textura de puntos muy sutil sobre el fondo oscuro */
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(63,185,80,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(63,185,80,0.04) 0%, transparent 70%);
+}
+
+/* Orbe de resplandor verde detrás de la tarjeta (efecto ambiental) */
+body::before {
+  content:          '';
+  position:         fixed;
+  top:              50%;
+  left:             50%;
+  transform:        translate(-50%, -60%);
+  width:            600px;
+  height:           600px;
+  border-radius:    50%;
+  background:       radial-gradient(circle, rgba(63,185,80,0.07) 0%, transparent 70%);
+  pointer-events:   none;
+  z-index:          0;
+  /* Leve pulsación para que el fondo tenga vida */
+  animation: ambientPulse 6s ease-in-out infinite;
+}
+
+@keyframes ambientPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -60%) scale(1);   }
+  50%       { opacity: 1;   transform: translate(-50%, -60%) scale(1.08); }
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * PANTALLA DE LOGIN
+ * ───────────────────────────────────────────────────────────── */
+.login-screen {
+  position:        relative;
+  z-index:         1;
+  width:           100%;
+  display:         flex;
+  justify-content: center;
+  /* Animación de entrada de la tarjeta */
+  animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * TARJETA PRINCIPAL — Glassmorphism oscuro
+ * ───────────────────────────────────────────────────────────── */
+.login-card {
+  background:     rgba(15, 20, 25, 0.92);
+  /* Borde superior verde sutil como toque de calidad */
+  border:         1px solid var(--border);
+  border-top:     1px solid rgba(63, 185, 80, 0.3);
+  border-radius:  var(--radius);
+  box-shadow:     var(--shadow-card);
+  padding:        2.5rem 2.25rem 2rem;
+  width:          100%;
+  max-width:      420px;
+  text-align:     center;
+  /* Vidrio esmerilado */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * ÁREA DEL LOGO
+ * ───────────────────────────────────────────────────────────── */
+.login-hero {
+  margin-bottom: 2.25rem;
+}
+
+/* Contenedor cuadrado redondeado para el emoji del logo */
+.login-logo-wrap {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  width:           80px;
+  height:          80px;
+  border-radius:   20px;
+  /* Fondo con gradiente de madera/cabaña */
+  background:      linear-gradient(145deg, #1a2a1a, #0f1f10);
+  border:          1px solid rgba(63, 185, 80, 0.25);
+  box-shadow:      0 0 0 6px rgba(63, 185, 80, 0.06),
+                   0 8px 24px rgba(0, 0, 0, 0.5);
+  margin-bottom:   1.25rem;
+  /* Animación de aparición del logo */
+  animation:       logoAppear 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+}
+
+@keyframes logoAppear {
+  from { transform: scale(0.4) rotate(-10deg); opacity: 0; }
+  to   { transform: scale(1)   rotate(0deg);  opacity: 1; }
+}
+
+.login-logo {
+  font-size:   2.4rem;
+  line-height: 1;
+  /* Leve sombra bajo el emoji */
+  filter:      drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+}
+
+/* Nombre del negocio */
+.login-title {
+  font-size:      1.65rem;
+  font-weight:    800;
+  color:          var(--text-primary);
+  letter-spacing: -0.5px;
+  /* Degradado sutil en el texto del nombre */
+  background:     linear-gradient(135deg, #e8edf3 30%, #a0b0c0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip:         text;
+}
+
+/* Subtítulo del sistema */
+.login-subtitle {
+  font-size:   0.82rem;
+  color:       var(--text-secondary);
+  margin-top:  0.45rem;
+  letter-spacing: 0.3px;
+  /* Línea decorativa bajo el subtítulo */
+  position:    relative;
+  padding-bottom: 1.5rem;
+}
+
+/* Separador decorativo con brillo verde */
+.login-subtitle::after {
+  content:    '';
+  position:   absolute;
+  bottom:     0;
+  left:       50%;
+  transform:  translateX(-50%);
+  width:      40px;
+  height:     2px;
+  background: linear-gradient(90deg, transparent, var(--color-green), transparent);
+  border-radius: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * FORMULARIO
+ * ───────────────────────────────────────────────────────────── */
+.login-form {
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 1.15rem;
+}
+
+/* Etiqueta del campo */
+.form-group label {
+  display:        block;
+  font-size:      0.75rem;
+  font-weight:    700;
+  color:          var(--text-secondary);
+  margin-bottom:  0.4rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* Wrapper para el input (con ícono decorativo a la izquierda) */
+.form-group {
+  position: relative;
+}
+
+/* Ícono dentro del input */
+.form-group::before {
+  /* Ícono de persona para el primer campo (usuario) */
+  position:    absolute;
+  left:        0.95rem;
+  bottom:      0;
+  height:      48px; /* altura del input */
+  display:     flex;
+  align-items: center;
+  font-size:   0.95rem;
+  color:       var(--text-muted);
+  pointer-events: none;
+  z-index:     1;
+}
+
+/* Inputs de texto/contraseña */
+.form-group input {
+  width:         100%;
+  padding:       0.85rem 1rem;
+  background:    var(--bg-input);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color:         var(--text-primary);
+  font-size:     0.97rem;
+  outline:       none;
+  transition:    border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+  /* Eliminar fondo blanco de autocompletar en Chrome */
+  -webkit-text-fill-color: var(--text-primary);
+}
+
+.form-group input::placeholder {
+  color:       var(--text-muted);
+  font-size:   0.9rem;
+}
+
+/* Estado focus — borde y brillo verde */
+.form-group input:focus {
+  border-color: var(--border-focus);
+  box-shadow:   var(--shadow-focus);
+  background:   rgba(63, 185, 80, 0.03);
+}
+
+/* Override del fondo azul de autocompletar en Chrome */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus {
+  -webkit-box-shadow:      0 0 0 100px var(--bg-input) inset;
+  -webkit-text-fill-color: var(--text-primary);
+  caret-color:             var(--text-primary);
+}
+
+/* ─ Mensaje de error ─ */
+.error-msg {
+  display:       flex;
+  align-items:   center;
+  gap:           0.4rem;
+  background:    rgba(248, 81, 73, 0.08);
+  border:        1px solid rgba(248, 81, 73, 0.35);
+  border-radius: var(--radius-xs);
+  color:         var(--color-danger);
+  font-size:     0.83rem;
+  padding:       0.6rem 0.9rem;
+  margin-bottom: 1.1rem;
+  line-height:   1.4;
+  /* Animación de aparición del error */
+  animation:     errorFadeIn 0.25s ease;
+}
+
+@keyframes errorFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * BOTÓN DE INGRESAR — Gradiente verde con brillo al hover
+ * ───────────────────────────────────────────────────────────── */
+.btn-login {
+  position:       relative;
+  overflow:       hidden;
+  width:          100%;
+  padding:        0.95rem;
+  background:     linear-gradient(135deg, #2ea043, #3fb950);
+  border:         none;
+  border-radius:  var(--radius-sm);
+  color:          #05100a;
+  font-size:      0.97rem;
+  font-weight:    800;
+  cursor:         pointer;
+  letter-spacing: 0.4px;
+  transition:     box-shadow 0.25s ease, transform 0.15s ease;
+  margin-top:     0.35rem;
+  box-shadow:     0 4px 20px rgba(63, 185, 80, 0.25);
+}
+
+/* Efecto de brillo que pasa por el botón al hacer hover */
+.btn-login::after {
+  content:    '';
+  position:   absolute;
+  top:        -50%;
+  left:       -75%;
+  width:      50%;
+  height:     200%;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 60%
+  );
+  transform:  skewX(-15deg);
+  transition: left 0.5s ease;
+}
+
+.btn-login:hover {
+  box-shadow: 0 6px 28px rgba(63, 185, 80, 0.4);
+  transform:  translateY(-1px);
+}
+
+/* Activa el barrido de brillo al hacer hover */
+.btn-login:hover::after {
+  left: 130%;
+}
+
+.btn-login:active {
+  transform:  translateY(0) scale(0.98);
+  box-shadow: 0 2px 12px rgba(63, 185, 80, 0.2);
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * PIE DE LA TARJETA
+ * ───────────────────────────────────────────────────────────── */
+.login-footer {
+  margin-top:  1.75rem;
+  font-size:   0.73rem;
+  color:       var(--text-muted);
+  letter-spacing: 0.2px;
+  /* Línea separadora sutil */
+  border-top:  1px solid var(--border);
+  padding-top: 1rem;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * ANIMACIÓN DE ERROR — shake al fallar el login
+ * (añadida y quitada por JS al fallar la validación)
+ * ───────────────────────────────────────────────────────────── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15%       { transform: translateX(-7px); }
+  30%       { transform: translateX(7px); }
+  45%       { transform: translateX(-5px); }
+  60%       { transform: translateX(5px); }
+  75%       { transform: translateX(-3px); }
+  90%       { transform: translateX(3px); }
+}
+
+.shake {
+  animation: shake 0.55s ease;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * RESPONSIVE — Móviles pequeños
+ * ───────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  body {
+    align-items: flex-start;
+    padding-top: 2.5rem;
+  }
+  .login-card {
+    padding: 2rem 1.5rem 1.75rem;
+    border-radius: 16px;
+  }
+  .login-title {
+    font-size: 1.45rem;
+  }
+  .login-logo-wrap {
+    width:  68px;
+    height: 68px;
+  }
+  .login-logo {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Pibe ⚽ — Control de Fiados</title>
+  <link rel="stylesheet" href="css/deudas.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BARRA DE NAVEGACIÓN PRINCIPAL
+       ═══════════════════════════════════════════════════════ -->
+  <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <div class="navbar-brand">
+      <span aria-hidden="true">⚽</span>
+      <span>El Pibe</span>
+    </div>
+
+    <button
+      id="navToggle"
+      class="nav-toggle"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="navbarMenu"
+    >☰</button>
+
+    <div id="navbarMenu" class="navbar-menu">
+      <a href="index.html"  class="nav-link">📊 Caja</a>
+      <a href="ventas.html" class="nav-link">🛒 Ventas</a>
+      <a href="deudas.html" class="nav-link">📋 Fiados</a>
+      <button id="logoutBtn" class="btn-logout">🚪 Salir</button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CONTENIDO PRINCIPAL
+       ═══════════════════════════════════════════════════════ -->
+  <main class="main-content">
+
+    <header class="page-header">
+      <h2 class="page-title">Control de Fiados</h2>
+      <p class="page-subtitle">
+        Administra los perfiles de clientes autorizados al crédito.
+        Registra nuevos deudores y gestiona abonos parciales.
+      </p>
+    </header>
+
+    <!-- ─── FORMULARIO DE NUEVO DEUDOR ─── -->
+    <section class="form-section">
+      <h3 class="section-title">Agregar Nuevo Deudor</h3>
+
+      <form id="debtorForm" class="debtor-form" novalidate>
+        <div class="form-row">
+          <div class="form-group form-group--grow">
+            <label for="debtorName">Nombre del cliente o equipo</label>
+            <input
+              type="text"
+              id="debtorName"
+              name="debtorName"
+              placeholder="Ej: Daniel · Equipo Los Patos · Renzo..."
+              autocomplete="off"
+              autocapitalize="words"
+              required
+            >
+          </div>
+          <button type="submit" class="btn-add-debtor">
+            ➕ Agregar
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ─── LISTADO DE DEUDORES ─── -->
+    <section class="debtors-section">
+      <h3 class="section-title">
+        Deudores Registrados
+        <span class="section-hint">
+          — Los abonos se acreditan inmediatamente a la billetera seleccionada
+        </span>
+      </h3>
+
+      <!-- app.js → renderDebtorsList() llena este contenedor dinámicamente.
+           Cada tarjeta incluye: saldo actual, formulario de abono y historial. -->
+      <div id="debtorsContainer" class="debtors-list">
+        <p class="empty-msg">📭 No hay deudores registrados. Agrega el primero arriba.</p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

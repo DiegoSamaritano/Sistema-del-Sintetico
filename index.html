@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Pibe ⚽ — Tablero de Caja</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BARRA DE NAVEGACIÓN PRINCIPAL (compartida en todas las páginas)
+       ═══════════════════════════════════════════════════════ -->
+  <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <div class="navbar-brand">
+      <span aria-hidden="true">⚽</span>
+      <span>El Pibe</span>
+    </div>
+
+    <!-- Botón hamburguesa para móvil -->
+    <button
+      id="navToggle"
+      class="nav-toggle"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="navbarMenu"
+    >☰</button>
+
+    <!-- Menú de navegación (se despliega en móvil) -->
+    <div id="navbarMenu" class="navbar-menu">
+      <a href="index.html"  class="nav-link">📊 Caja</a>
+      <a href="ventas.html" class="nav-link">🛒 Ventas</a>
+      <a href="deudas.html" class="nav-link">📋 Fiados</a>
+      <button id="logoutBtn" class="btn-logout">🚪 Salir</button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       CONTENIDO PRINCIPAL
+       ═══════════════════════════════════════════════════════ -->
+  <main class="main-content" id="dashboardSection">
+
+    <header class="page-header">
+      <h2 class="page-title">Tablero de Caja</h2>
+      <p class="page-subtitle">
+        Resumen en tiempo real de los ingresos de la jornada.
+      </p>
+    </header>
+
+    <!-- ─── GRID DE BILLETERAS ─── -->
+    <!-- Cada tarjeta muestra el total acumulado por método de pago -->
+    <section class="wallets-grid" aria-label="Resumen de billeteras">
+
+      <!-- Efectivo -->
+      <div class="wallet-card wallet-card--efectivo">
+        <div class="wallet-icon">💵</div>
+        <div class="wallet-info">
+          <p class="wallet-label">Efectivo</p>
+          <p class="wallet-amount" id="walletEfectivo">S/ 0.00</p>
+        </div>
+      </div>
+
+      <!-- Yape -->
+      <div class="wallet-card wallet-card--yape">
+        <div class="wallet-icon">🔮</div>
+        <div class="wallet-info">
+          <p class="wallet-label">Yape</p>
+          <p class="wallet-amount" id="walletYape">S/ 0.00</p>
+        </div>
+      </div>
+
+      <!-- Plin -->
+      <div class="wallet-card wallet-card--plin">
+        <div class="wallet-icon">📱</div>
+        <div class="wallet-info">
+          <p class="wallet-label">Plin</p>
+          <p class="wallet-amount" id="walletPlin">S/ 0.00</p>
+        </div>
+      </div>
+
+      <!-- Por Cobrar (fiados pendientes) -->
+      <div class="wallet-card wallet-card--receivable">
+        <div class="wallet-icon">📋</div>
+        <div class="wallet-info">
+          <p class="wallet-label">Por Cobrar</p>
+          <p class="wallet-amount" id="walletReceivable">S/ 0.00</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ─── BARRA DE TOTALES ─── -->
+    <section class="totals-bar" aria-label="Total de caja">
+      <div class="totals-bar-inner">
+        <div class="total-block">
+          <span class="total-label">💰 Total Real (Efectivo + Yape + Plin)</span>
+          <span class="total-amount" id="walletTotal">S/ 0.00</span>
+        </div>
+        <div class="total-block total-block--secondary">
+          <span class="total-label">📦 Movimientos</span>
+          <span class="total-amount" id="txCount">0 ventas</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── BOTÓN DE CIERRE DE CAJA ─── -->
+    <section class="cierre-section">
+      <button id="closeCajaBtn" class="btn-cierre" aria-label="Cerrar caja del día">
+        🔒 Cerrar Caja del Día
+      </button>
+      <p class="cierre-hint">
+        Muestra el resumen final y resetea las billeteras para una nueva jornada.
+        Los fiados pendientes se conservan.
+      </p>
+    </section>
+
+    <!-- ─── HISTORIAL DE MOVIMIENTOS ─── -->
+    <section class="historial-section" aria-label="Historial de movimientos">
+      <h3 class="section-title">Historial de Movimientos</h3>
+      <!-- app.js → renderTransactionHistory() llenará este contenedor -->
+      <div id="historialContainer" class="historial-list">
+        <p class="empty-msg">📭 No hay movimientos en esta sesión.</p>
+      </div>
+    </section>
+
+  </main><!-- /main-content -->
+
+  <script src="js/app.js"></script>
+</body>
+</html>
