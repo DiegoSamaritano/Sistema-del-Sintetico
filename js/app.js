@@ -163,10 +163,10 @@ function getTotalReceivable(state) {
  */
 function getMethodInfo(method) {
   const map = {
-    efectivo: { emoji: '💵', label: 'Efectivo', cssClass: 'method-efectivo' },
-    yape:     { emoji: '🔮', label: 'Yape',     cssClass: 'method-yape'     },
-    plin:     { emoji: '📱', label: 'Plin',     cssClass: 'method-plin'     },
-    fiado:    { emoji: '📋', label: 'Fiado',    cssClass: 'method-fiado'    }
+    efectivo: { emoji: '<img src="img/sol.png" class="method-icon" alt="Efectivo">', label: 'Efectivo', cssClass: 'method-efectivo' },
+    yape:     { emoji: '<img src="img/yape.png" class="method-icon" alt="Yape">',     label: 'Yape',     cssClass: 'method-yape'     },
+    plin:     { emoji: '<img src="img/plin.png" class="method-icon" alt="Plin">',     label: 'Plin',     cssClass: 'method-plin'     },
+    fiado:    { emoji: '<img src="img/deuda.png" class="method-icon" alt="Fiado">',   label: 'Fiado',    cssClass: 'method-fiado'    }
   };
   return map[method] || { emoji: '❓', label: method, cssClass: '' };
 }
@@ -752,12 +752,22 @@ function buildDebtorCard(debtor) {
           >
         </div>
         <div class="form-field">
-          <label for="mth_${sid}">Método de pago</label>
-          <select id="mth_${sid}" class="select-payment">
-            <option value="efectivo">💵 Efectivo</option>
-            <option value="yape">🔮 Yape</option>
-            <option value="plin">📱 Plin</option>
-          </select>
+          <label>Método de pago</label>
+          <input type="hidden" id="mth_${sid}" value="efectivo">
+          <div class="method-picker">
+            <button type="button" class="method-btn method-btn--active" data-target="mth_${sid}" data-value="efectivo" onclick="selectAbMethod(this)">
+              <img src="img/sol.png" alt="Efectivo">
+              <span>Efectivo</span>
+            </button>
+            <button type="button" class="method-btn" data-target="mth_${sid}" data-value="yape" onclick="selectAbMethod(this)">
+              <img src="img/yape.png" alt="Yape">
+              <span>Yape</span>
+            </button>
+            <button type="button" class="method-btn" data-target="mth_${sid}" data-value="plin" onclick="selectAbMethod(this)">
+              <img src="img/plin.png" alt="Plin">
+              <span>Plin</span>
+            </button>
+          </div>
         </div>
       </div>
       <button class="btn-pay" onclick="handlePayment('${sid}')">
@@ -810,6 +820,13 @@ function buildDebtorCard(debtor) {
  *  3. Registra el movimiento en el historial global.
  * @param {string} debtorId — ID del deudor a quien se le abona
  */
+function selectAbMethod(btn) {
+  const picker = btn.closest('.method-picker');
+  picker.querySelectorAll('.method-btn').forEach(b => b.classList.remove('method-btn--active'));
+  btn.classList.add('method-btn--active');
+  document.getElementById(btn.dataset.target).value = btn.dataset.value;
+}
+
 function handlePayment(debtorId) {
   const amountInput  = document.getElementById(`amt_${debtorId}`);
   const methodSelect = document.getElementById(`mth_${debtorId}`);
@@ -933,3 +950,54 @@ document.addEventListener('DOMContentLoaded', function () {
   initVentasPage();    // Actúa solo si está en ventas.html
   initDeudasPage();    // Actúa solo si está en deudas.html
 });
+
+/* ─────────────────────────────────────────────────────────────
+ * SELECTOR DE CERVEZAS (ventas.html)
+ * ───────────────────────────────────────────────────────────── */
+function selectCerveza(brand) {
+  document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('brand-btn--active'));
+  const bb = document.getElementById(`bb-${brand}`);
+  if (bb) bb.classList.add('brand-btn--active');
+
+  document.getElementById('cerv-calc').classList.remove('hidden');
+  const brandLabel = document.getElementById('cerv-calc-brand');
+  if (brandLabel) brandLabel.textContent = brand;
+
+  document.getElementById('manualBlock').classList.add('hidden');
+  document.getElementById('manualDivider').classList.add('hidden');
+
+  document.getElementById('saleDescription').value = `Cerveza ${brand}`;
+
+  document.getElementById('cervQty').value   = '1';
+  document.getElementById('cervPrice').value = '';
+  document.getElementById('cerv-total-val').textContent = 'S/ 0.00';
+  document.getElementById('saleAmount').value = '';
+
+  const priceEl = document.getElementById('cervPrice');
+  if (priceEl) priceEl.focus();
+}
+
+function clearCerveza() {
+  document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('brand-btn--active'));
+  document.getElementById('cerv-calc').classList.add('hidden');
+  document.getElementById('manualBlock').classList.remove('hidden');
+  document.getElementById('manualDivider').classList.remove('hidden');
+
+  document.getElementById('saleDescription').value = '';
+  document.getElementById('saleAmount').value      = '';
+  document.getElementById('cervQty').value         = '1';
+  document.getElementById('cervPrice').value       = '';
+  document.getElementById('cerv-total-val').textContent = 'S/ 0.00';
+}
+
+function calcCerveza() {
+  const qty   = parseFloat(document.getElementById('cervQty')?.value)   || 0;
+  const price = parseFloat(document.getElementById('cervPrice')?.value) || 0;
+  const total = qty * price;
+
+  const totalEl = document.getElementById('cerv-total-val');
+  if (totalEl) totalEl.textContent = `S/ ${total.toFixed(2)}`;
+
+  const amtEl = document.getElementById('saleAmount');
+  if (amtEl) amtEl.value = total > 0 ? total.toFixed(2) : '';
+}
