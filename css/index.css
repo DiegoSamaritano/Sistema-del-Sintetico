@@ -1,288 +1,232 @@
-/* =============================================================
- * EL PIBE ⚽ — css/index.css
- * Estilos exclusivos del Dashboard / Tablero de Caja (index.html)
- * ============================================================= */
+/* ============================================================
+   GIAFER y JOAKO — index.css  |  Light Mode
+   ============================================================ */
 
-/* ─────────────────────────────────────────────────────────────
- * VARIABLES CSS GLOBALES (Paleta Dark Mode)
- * Mismas variables que en los otros CSS para consistencia visual.
- * Edita aquí para cambiar el tema de esta página.
- * ───────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 :root {
-  --bg-base:          #0d1117;
-  --bg-card:          #161b22;
-  --bg-input:         #0d1117;
-  --bg-hover:         #21262d;
-  --border:           #30363d;
-  --border-focus:     #58a6ff;
-  --text-primary:     #e6edf3;
-  --text-secondary:   #8b949e;
-  --text-muted:       #6e7681;
-  --color-efectivo:   #3fb950;
-  --color-yape:       #a371f7;
-  --color-plin:       #58a6ff;
-  --color-fiado:      #e3b341;
-  --color-success:    #3fb950;
-  --color-warning:    #e3b341;
-  --color-danger:     #f85149;
-  --color-info:       #58a6ff;
-  --radius:           12px;
-  --radius-sm:        8px;
-  --radius-xs:        5px;
-  --shadow-card:      0 4px 20px rgba(0, 0, 0, 0.45);
-  --shadow-focus:     0 0 0 3px rgba(88, 166, 255, 0.3);
-  --navbar-height:    60px;
+  --bg:           #F8FAFC;
+  --surface:      #FFFFFF;
+  --surface-2:    #F1F5F9;
+  --border:       #E2E8F0;
+  --border-2:     #CBD5E1;
+  --accent:       #1D4ED8;
+  --accent-h:     #1E40AF;
+  --accent-lt:    #EFF6FF;
+  --t1:           #0F172A;
+  --t2:           #64748B;
+  --t3:           #94A3B8;
+  --color-efectivo:   #059669;
+  --color-yape:       #7C3AED;
+  --color-plin:       #2563EB;
+  --color-fiado:      #D97706;
+  --color-success:    #059669;
+  --color-warning:    #D97706;
+  --color-danger:     #DC2626;
+  --color-info:       #2563EB;
+  --radius:       14px;
+  --radius-sm:    9px;
+  --radius-xs:    6px;
+  --shadow:       0 1px 3px rgba(0,0,0,.05), 0 4px 16px rgba(0,0,0,.06);
+  --shadow-focus: 0 0 0 3px rgba(29,78,216,.15);
+  --navbar-height: 60px;
 }
 
-/* ─────────────────────────────────────────────────────────────
- * RESET Y BASE
- * ───────────────────────────────────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin:     0;
-  padding:    0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family:      system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-base);
-  color:            var(--text-primary);
-  min-height:       100vh;
+  font-family:  'Inter', system-ui, sans-serif;
+  background:   var(--bg);
+  color:        var(--t1);
+  min-height:   100vh;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ─────────────────────────────────────────────────────────────
- * NAVBAR
- * Barra de navegación fija en la parte superior.
- * El mismo estilo base se replica en ventas.css y deudas.css.
- * ───────────────────────────────────────────────────────────── */
+/* ── NAVBAR ── */
 .navbar {
-  position:         sticky;
-  top:              0;
-  z-index:          100;
-  display:          flex;
-  align-items:      center;
-  justify-content:  space-between;
-  height:           var(--navbar-height);
-  padding:          0 1.25rem;
-  background:       var(--bg-card);
-  border-bottom:    1px solid var(--border);
-  backdrop-filter:  blur(8px);
+  position:        sticky;
+  top:             0;
+  z-index:         100;
+  height:          var(--navbar-height);
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  padding:         0 1.5rem;
+  background:      rgba(255,255,255,.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom:   1px solid var(--border);
+  box-shadow:      0 1px 0 var(--border);
 }
 
 .navbar-brand {
   display:     flex;
   align-items: center;
-  gap:         0.5rem;
-  font-size:   1.2rem;
+  gap:         .5rem;
+  font-size:   1rem;
   font-weight: 700;
-  color:       var(--text-primary);
+  color:       var(--t1);
+  letter-spacing: -.2px;
   white-space: nowrap;
 }
 
-/* El botón hamburguesa solo aparece en móvil */
 .nav-toggle {
   display:       none;
   background:    none;
   border:        1px solid var(--border);
   border-radius: var(--radius-xs);
-  color:         var(--text-primary);
-  font-size:     1.2rem;
-  padding:       0.3rem 0.6rem;
+  color:         var(--t2);
+  font-size:     1.1rem;
+  padding:       .3rem .6rem;
   cursor:        pointer;
-  line-height:   1;
 }
 
-.navbar-menu {
-  display:     flex;
-  align-items: center;
-  gap:         0.25rem;
-}
+.navbar-menu { display: flex; align-items: center; gap: .15rem; }
 
 .nav-link {
-  display:       inline-block;
-  padding:       0.45rem 0.85rem;
-  border-radius: var(--radius-xs);
-  color:         var(--text-secondary);
+  display:         inline-block;
+  padding:         .4rem .85rem;
+  border-radius:   var(--radius-xs);
+  color:           var(--t2);
   text-decoration: none;
-  font-size:     0.88rem;
-  font-weight:   500;
-  transition:    color 0.2s, background 0.2s;
+  font-size:       .875rem;
+  font-weight:     500;
+  transition:      color .15s, background .15s;
 }
-
-.nav-link:hover,
-.nav-link.active {
-  color:      var(--text-primary);
-  background: var(--bg-hover);
-}
-
-.nav-link.active {
-  color:      var(--color-info);
-  font-weight: 600;
-}
+.nav-link:hover  { color: var(--t1); background: var(--surface-2); }
+.nav-link.active { color: var(--accent); background: var(--accent-lt); font-weight: 600; }
 
 .btn-logout {
-  margin-left:   0.5rem;
-  padding:       0.4rem 0.9rem;
+  margin-left:   .5rem;
+  padding:       .4rem .85rem;
   background:    transparent;
-  border:        1px solid var(--border);
+  border:        1px solid var(--border-2);
   border-radius: var(--radius-xs);
-  color:         var(--text-secondary);
-  font-size:     0.82rem;
+  color:         var(--t2);
+  font-size:     .82rem;
+  font-family:   inherit;
   cursor:        pointer;
-  transition:    border-color 0.2s, color 0.2s;
+  transition:    all .15s;
 }
+.btn-logout:hover { border-color: var(--color-danger); color: var(--color-danger); }
 
-.btn-logout:hover {
-  border-color: var(--color-danger);
-  color:        var(--color-danger);
-}
-
-/* ─ Menú responsive ─ */
 @media (max-width: 600px) {
-  .nav-toggle {
-    display: block;
-  }
+  .nav-toggle { display: block; }
   .navbar-menu {
-    display:       none;
-    position:      absolute;
-    top:           var(--navbar-height);
-    left:          0;
-    right:         0;
-    background:    var(--bg-card);
-    border-bottom: 1px solid var(--border);
+    display:        none;
+    position:       absolute;
+    top:            var(--navbar-height);
+    left: 0; right: 0;
+    background:     #fff;
+    border-bottom:  1px solid var(--border);
     flex-direction: column;
-    align-items:   stretch;
-    padding:       0.75rem;
-    gap:           0.3rem;
-    box-shadow:    0 8px 24px rgba(0,0,0,0.5);
+    align-items:    stretch;
+    padding:        .6rem;
+    gap:            .15rem;
+    box-shadow:     0 8px 24px rgba(0,0,0,.1);
   }
-  .navbar-menu.open {
-    display: flex;
-  }
-  .nav-link {
-    padding:    0.75rem 1rem;
-    font-size:  1rem;
-  }
-  .btn-logout {
-    margin:     0;
-    padding:    0.75rem 1rem;
-    text-align: left;
-    font-size:  1rem;
-  }
+  .navbar-menu.open { display: flex; }
+  .nav-link, .btn-logout { padding: .75rem 1rem; font-size: .9rem; margin: 0; text-align: left; }
 }
 
-/* ─────────────────────────────────────────────────────────────
- * CONTENIDO PRINCIPAL
- * ───────────────────────────────────────────────────────────── */
+/* ── LAYOUT ── */
 .main-content {
   max-width: 900px;
   margin:    0 auto;
-  padding:   1.5rem 1.25rem 3rem;
+  padding:   2rem 1.5rem 4rem;
 }
 
-.page-header {
-  margin-bottom: 1.75rem;
-}
+.page-header { margin-bottom: 1.75rem; }
 
 .page-title {
-  font-size:   1.6rem;
-  font-weight: 700;
-  color:       var(--text-primary);
+  font-size:      1.65rem;
+  font-weight:    800;
+  color:          var(--t1);
+  letter-spacing: -.4px;
 }
 
 .page-subtitle {
-  font-size:  0.88rem;
-  color:      var(--text-secondary);
-  margin-top: 0.35rem;
+  font-size:  .875rem;
+  color:      var(--t2);
+  margin-top: .35rem;
   line-height: 1.5;
 }
 
 .section-title {
-  font-size:     1rem;
-  font-weight:   600;
-  color:         var(--text-primary);
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--border);
+  font-size:      .78rem;
+  font-weight:    700;
+  color:          var(--t2);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin-bottom:  1rem;
+  padding-bottom: .75rem;
+  border-bottom:  1px solid var(--border);
 }
 
-/* ─────────────────────────────────────────────────────────────
- * GRID DE BILLETERAS
- * 2 columnas en desktop/tablet, 2 columnas en móvil (compacto)
- * ───────────────────────────────────────────────────────────── */
+/* ── GRID BILLETERAS ── */
 .wallets-grid {
   display:               grid;
   grid-template-columns: repeat(2, 1fr);
-  gap:                   0.85rem;
-  margin-bottom:         1.25rem;
+  gap:                   .85rem;
+  margin-bottom:         1rem;
 }
 
-/* Cada tarjeta de billetera */
 .wallet-card {
   display:        flex;
   align-items:    center;
-  gap:            0.9rem;
-  background:     var(--bg-card);
+  gap:            .9rem;
+  background:     var(--surface);
   border:         1px solid var(--border);
+  border-left:    4px solid var(--border);
   border-radius:  var(--radius);
-  padding:        1.2rem 1rem;
-  box-shadow:     var(--shadow-card);
-  border-left-width: 4px;
-  transition:     transform 0.15s;
+  padding:        1.25rem 1rem;
+  box-shadow:     var(--shadow);
+  transition:     transform .15s, box-shadow .15s;
 }
+.wallet-card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,.09); }
 
-.wallet-card:hover {
-  transform: translateY(-2px);
-}
-
-/* Borde izquierdo de color único por método de pago */
 .wallet-card--efectivo   { border-left-color: var(--color-efectivo); }
-.wallet-card--yape       { border-left-color: var(--color-yape);     }
-.wallet-card--plin       { border-left-color: var(--color-plin);     }
-.wallet-card--receivable { border-left-color: var(--color-fiado);    }
+.wallet-card--yape       { border-left-color: var(--color-yape); }
+.wallet-card--plin       { border-left-color: var(--color-plin); }
+.wallet-card--receivable { border-left-color: var(--color-fiado); }
 
 .wallet-icon {
-  font-size:   2rem;
   flex-shrink: 0;
   line-height: 1;
 }
 
-.wallet-info {
-  display:        flex;
-  flex-direction: column;
-  gap:            0.15rem;
-  min-width:      0; /* Permite que el texto se trunque si es necesario */
+.wallet-icon img {
+  width:      56px !important;
+  height:     56px;
+  object-fit: contain;
 }
 
+.wallet-info { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+
 .wallet-label {
-  font-size:   0.78rem;
-  color:       var(--text-secondary);
-  font-weight: 500;
+  font-size:      .7rem;
+  color:          var(--t2);
+  font-weight:    600;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
+  letter-spacing: .4px;
 }
 
 .wallet-amount {
-  font-size:   1.45rem;
-  font-weight: 700;
-  color:       var(--text-primary);
-  letter-spacing: -0.5px;
-  white-space: nowrap;
+  font-size:      1.4rem;
+  font-weight:    800;
+  color:          var(--t1);
+  letter-spacing: -.5px;
+  white-space:    nowrap;
 }
 
-/* ─────────────────────────────────────────────────────────────
- * BARRA DE TOTALES
- * ───────────────────────────────────────────────────────────── */
+/* ── BARRA TOTALES ── */
 .totals-bar {
-  background:    var(--bg-card);
+  background:    var(--surface);
   border:        1px solid var(--border);
   border-radius: var(--radius);
   padding:       1rem 1.25rem;
-  margin-bottom: 1.5rem;
-  box-shadow:    var(--shadow-card);
+  margin-bottom: 1.25rem;
+  box-shadow:    var(--shadow);
 }
 
 .totals-bar-inner {
@@ -290,182 +234,155 @@ body {
   justify-content: space-between;
   align-items:     center;
   flex-wrap:       wrap;
-  gap:             0.75rem;
+  gap:             .75rem;
 }
 
-.total-block {
-  display:        flex;
-  flex-direction: column;
-  gap:            0.2rem;
-}
+.total-block { display: flex; flex-direction: column; gap: .2rem; }
 
 .total-label {
-  font-size:  0.8rem;
-  color:      var(--text-secondary);
+  font-size:   .78rem;
+  color:       var(--t2);
+  font-weight: 500;
+  display:     flex;
+  align-items: center;
+  gap:         .35rem;
 }
 
+.total-label img { width: 14px !important; height: 14px; object-fit: contain; }
+
 .total-amount {
-  font-size:   1.5rem;
-  font-weight: 700;
-  color:       var(--color-success);
+  font-size:      1.5rem;
+  font-weight:    800;
+  color:          var(--color-success);
+  letter-spacing: -.4px;
 }
 
 .total-block--secondary .total-amount {
-  font-size: 1.1rem;
-  color:     var(--text-secondary);
+  font-size:   1.1rem;
+  font-weight: 700;
+  color:       var(--t2);
 }
 
-/* ─────────────────────────────────────────────────────────────
- * BOTÓN DE CIERRE DE CAJA
- * ───────────────────────────────────────────────────────────── */
+/* ── CIERRE DE CAJA ── */
 .cierre-section {
   text-align:    center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 .btn-cierre {
-  padding:       0.85rem 2rem;
-  background:    transparent;
-  border:        2px solid var(--color-warning);
-  border-radius: var(--radius-sm);
-  color:         var(--color-warning);
-  font-size:     1rem;
-  font-weight:   700;
-  cursor:        pointer;
-  letter-spacing: 0.3px;
-  transition:    background 0.2s, color 0.2s, transform 0.15s;
+  padding:        .8rem 2rem;
+  background:     transparent;
+  border:         1.5px solid var(--color-warning);
+  border-radius:  var(--radius-sm);
+  color:          var(--color-warning);
+  font-size:      .9rem;
+  font-weight:    700;
+  font-family:    inherit;
+  cursor:         pointer;
+  letter-spacing: .2px;
+  transition:     all .15s;
 }
-
-.btn-cierre:hover {
-  background: var(--color-warning);
-  color:      #0d1117;
-}
-
-.btn-cierre:active {
-  transform: scale(0.97);
-}
+.btn-cierre:hover  { background: var(--color-warning); color: #fff; }
+.btn-cierre:active { transform: scale(.97); }
 
 .cierre-hint {
-  font-size:  0.8rem;
-  color:      var(--text-muted);
-  margin-top: 0.6rem;
-  max-width:  400px;
+  font-size:   .78rem;
+  color:       var(--t3);
+  margin-top:  .55rem;
+  max-width:   400px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.5;
 }
 
-/* ─────────────────────────────────────────────────────────────
- * HISTORIAL DE MOVIMIENTOS
- * ───────────────────────────────────────────────────────────── */
+/* ── HISTORIAL ── */
 .historial-section {
-  background:    var(--bg-card);
+  background:    var(--surface);
   border:        1px solid var(--border);
   border-radius: var(--radius);
-  padding:       1.25rem;
-  box-shadow:    var(--shadow-card);
+  padding:       1.25rem 1.25rem 1rem;
+  box-shadow:    var(--shadow);
 }
 
 .historial-list {
   display:        flex;
   flex-direction: column;
-  gap:            0.5rem;
-  max-height:     520px;
+  max-height:     500px;
   overflow-y:     auto;
-  /* Scroll suave en iOS */
   -webkit-overflow-scrolling: touch;
 }
 
-/* Barra de scroll personalizada (solo Webkit) */
-.historial-list::-webkit-scrollbar       { width: 5px; }
+.historial-list::-webkit-scrollbar       { width: 4px; }
 .historial-list::-webkit-scrollbar-track { background: transparent; }
-.historial-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+.historial-list::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 4px; }
 
-/* Cada fila de transacción */
+/* Fila de transacción */
 .tx-item {
   display:       flex;
   align-items:   center;
-  gap:           0.85rem;
-  padding:       0.75rem 0.9rem;
-  background:    var(--bg-base);
-  border:        1px solid var(--border);
-  border-radius: var(--radius-sm);
-  transition:    background 0.15s;
+  gap:           .85rem;
+  padding:       .75rem .5rem;
+  border-bottom: 1px solid var(--border);
+  transition:    background .12s;
+  border-radius: var(--radius-xs);
+}
+.tx-item:last-child  { border-bottom: none; }
+.tx-item:hover       { background: var(--surface-2); }
+
+.method-icon {
+  width:      22px;
+  height:     22px;
+  object-fit: contain;
+  display:    block;
 }
 
-.tx-item:hover {
-  background: var(--bg-hover);
-}
-
-/* Badge circular con el emoji del método de pago */
 .tx-badge {
-  width:          40px;
-  height:         40px;
-  border-radius:  50%;
-  display:        flex;
-  align-items:    center;
+  width:           38px;
+  height:          38px;
+  border-radius:   var(--radius-xs);
+  display:         flex;
+  align-items:     center;
   justify-content: center;
-  font-size:      1.2rem;
-  flex-shrink:    0;
+  flex-shrink:     0;
 }
 
-/* Fondo de cada badge según método de pago */
-.method-efectivo { background: rgba(63,  185, 80,  0.15); }
-.method-yape     { background: rgba(163, 113, 247, 0.15); }
-.method-plin     { background: rgba(88,  166, 255, 0.15); }
-.method-fiado    { background: rgba(227, 179, 65,  0.15); }
+.method-efectivo { background: #D1FAE5; }
+.method-yape     { background: #EDE9FE; }
+.method-plin     { background: #DBEAFE; }
+.method-fiado    { background: #FEF3C7; }
 
-.tx-body {
-  flex:           1;
-  display:        flex;
-  flex-direction: column;
-  gap:            0.15rem;
-  min-width:      0;
-}
+.tx-body { flex: 1; display: flex; flex-direction: column; gap: .1rem; min-width: 0; }
 
 .tx-desc {
-  font-size:     0.92rem;
-  color:         var(--text-primary);
+  font-size:     .9rem;
+  color:         var(--t1);
   font-weight:   500;
   white-space:   nowrap;
   overflow:      hidden;
   text-overflow: ellipsis;
 }
 
-.tx-meta {
-  font-size: 0.76rem;
-  color:     var(--text-muted);
-}
+.tx-meta { font-size: .72rem; color: var(--t3); }
 
 .tx-amount {
-  font-size:   1rem;
+  font-size:   .95rem;
   font-weight: 700;
   flex-shrink: 0;
   white-space: nowrap;
 }
 
 .tx-amount--positive { color: var(--color-success); }
-.tx-amount--fiado    { color: var(--color-fiado);   }
+.tx-amount--fiado    { color: var(--color-fiado); }
 
-/* ─ Estado vacío ─ */
 .empty-msg {
   text-align: center;
-  color:      var(--text-muted);
-  font-size:  0.9rem;
-  padding:    1.5rem;
+  color:      var(--t3);
+  font-size:  .875rem;
+  padding:    2rem;
 }
 
-/* ─────────────────────────────────────────────────────────────
- * RESPONSIVE — Ajustes para pantallas muy pequeñas
- * ───────────────────────────────────────────────────────────── */
 @media (max-width: 380px) {
-  .wallet-amount {
-    font-size: 1.1rem;
-  }
-  .wallet-icon {
-    font-size: 1.5rem;
-  }
-  .wallet-card {
-    padding: 0.9rem 0.75rem;
-    gap:     0.6rem;
-  }
+  .wallet-amount    { font-size: 1.1rem; }
+  .wallet-icon img  { width: 44px !important; }
+  .wallet-card      { padding: .9rem .75rem; gap: .6rem; }
 }
