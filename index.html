@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> GIAFER y JOAKO 🛖 — Tablero de Caja</title>
+  <title>GIAFER y JOAKO — Tablero de Caja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
@@ -28,10 +31,10 @@
 
     <!-- Menú de navegación (se despliega en móvil) -->
     <div id="navbarMenu" class="navbar-menu">
-      <a href="index.html"  class="nav-link">📊 Caja</a>
-      <a href="ventas.html" class="nav-link">🛒 Ventas</a>
-      <a href="deudas.html" class="nav-link">📋 Fiados</a>
-      <button id="logoutBtn" class="btn-logout">🚪 Salir</button>
+      <a href="index.html"  class="nav-link"> Caja</a>
+      <a href="ventas.html" class="nav-link"> Ventas</a>
+      <a href="deudas.html" class="nav-link"> Fiados</a>
+      <button id="logoutBtn" class="btn-logout"> Salir</button>
     </div>
   </nav>
 
@@ -43,7 +46,7 @@
     <header class="page-header">
       <h2 class="page-title">Tablero de Caja</h2>
       <p class="page-subtitle">
-        Resumen en tiempo real de los ingresos de la jornada.
+        Resumen en tiempo real de los ingresos del Dia Sabado.
       </p>
     </header>
 
@@ -53,36 +56,32 @@
 
       <!-- Efectivo -->
       <div class="wallet-card wallet-card--efectivo">
-        <div class="wallet-icon">💵</div>
+        <div class="wallet-icon"><img src="img/sol.png" alt="Soles" style="width: 80px;"></div>
         <div class="wallet-info">
-          <p class="wallet-label">Efectivo</p>
           <p class="wallet-amount" id="walletEfectivo">S/ 0.00</p>
         </div>
       </div>
 
       <!-- Yape -->
       <div class="wallet-card wallet-card--yape">
-        <div class="wallet-icon">🔮</div>
+        <div class="wallet-icon"> <img src="img/yape.png" alt="Yape" style="width: 80px;"></div>
         <div class="wallet-info">
-          <p class="wallet-label">Yape</p>
           <p class="wallet-amount" id="walletYape">S/ 0.00</p>
         </div>
       </div>
 
       <!-- Plin -->
       <div class="wallet-card wallet-card--plin">
-        <div class="wallet-icon">📱</div>
+        <div class="wallet-icon"><img src="img/plin.png" alt="PLIN" style="width: 80px;"></div>
         <div class="wallet-info">
-          <p class="wallet-label">Plin</p>
           <p class="wallet-amount" id="walletPlin">S/ 0.00</p>
         </div>
       </div>
 
       <!-- Por Cobrar (fiados pendientes) -->
       <div class="wallet-card wallet-card--receivable">
-        <div class="wallet-icon">📋</div>
+        <div class="wallet-icon"><img src="img/deuda.png" alt="Deuda" style="width: 80px;"></div>
         <div class="wallet-info">
-          <p class="wallet-label">Por Cobrar</p>
           <p class="wallet-amount" id="walletReceivable">S/ 0.00</p>
         </div>
       </div>
@@ -93,7 +92,7 @@
     <section class="totals-bar" aria-label="Total de caja">
       <div class="totals-bar-inner">
         <div class="total-block">
-          <span class="total-label">💰 Total Real (Efectivo + Yape + Plin)</span>
+          <span class="total-label"><img src="img/sol.png" alt="Soles" style="width: 15px;"> Monto Total </span>
           <span class="total-amount" id="walletTotal">S/ 0.00</span>
         </div>
         <div class="total-block total-block--secondary">
@@ -106,7 +105,7 @@
     <!-- ─── BOTÓN DE CIERRE DE CAJA ─── -->
     <section class="cierre-section">
       <button id="closeCajaBtn" class="btn-cierre" aria-label="Cerrar caja del día">
-        🔒 Cerrar Caja del Día
+        Cerrar Caja 
       </button>
       <p class="cierre-hint">
         Muestra el resumen final y resetea las billeteras para una nueva jornada.

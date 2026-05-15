@@ -3,173 +3,173 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GIAFER y JOAKO 🛖 — Registro de Ventas</title>
+  <title>GIAFER y JOAKO — Ventas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/ventas.css">
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════════════════
-       BARRA DE NAVEGACIÓN PRINCIPAL
-       ═══════════════════════════════════════════════════════ -->
-  <nav class="navbar" role="navigation" aria-label="Navegación principal">
+  <nav class="navbar">
     <div class="navbar-brand">
-      <span aria-hidden="true">🛖</span>
-      <span>GIAFER y JOAKO</span>
+      <span class="brand-icon">⚽</span>
+      <span class="brand-text">GIAFER y JOAKO</span>
     </div>
-
-    <button
-      id="navToggle"
-      class="nav-toggle"
-      aria-label="Abrir menú"
-      aria-expanded="false"
-      aria-controls="navbarMenu"
-    >☰</button>
-
+    <button id="navToggle" class="nav-toggle" aria-label="Menú" aria-expanded="false" aria-controls="navbarMenu">
+      <span></span><span></span><span></span>
+    </button>
     <div id="navbarMenu" class="navbar-menu">
-      <a href="index.html"  class="nav-link">📊 Caja</a>
-      <a href="ventas.html" class="nav-link">🛒 Ventas</a>
-      <a href="deudas.html" class="nav-link">📋 Fiados</a>
-      <button id="logoutBtn" class="btn-logout">🚪 Salir</button>
+      <a href="index.html"  class="nav-link">Caja</a>
+      <a href="ventas.html" class="nav-link active">Ventas</a>
+      <a href="deudas.html" class="nav-link">Fiados</a>
+      <button id="logoutBtn" class="btn-logout">Salir</button>
     </div>
   </nav>
 
-  <!-- ═══════════════════════════════════════════════════════
-       CONTENIDO PRINCIPAL
-       ═══════════════════════════════════════════════════════ -->
   <main class="main-content">
 
-    <header class="page-header">
-      <h2 class="page-title">Registro de Ventas</h2>
-      <p class="page-subtitle">
-        Registra ventas de productos, alquiler de cancha o cualquier ingreso.
-        Para alquiler, describe el texto (Ej: "Alquiler cancha – Daniel") y el monto acordado.
-      </p>
-    </header>
+    <div class="page-header">
+      <h1 class="page-title">Nueva Venta</h1>
+    </div>
 
-    <!-- ─── FORMULARIO DE NUEVA VENTA ─── -->
-    <section class="form-section">
-      <h3 class="section-title">Nueva Venta</h3>
+    <div class="card">
+      <form id="ventasForm" novalidate>
 
-      <form id="ventasForm" class="venta-form" novalidate>
-
-        <!-- Descripción del producto o servicio -->
-        <div class="form-group">
-          <label for="saleDescription">Descripción del producto / servicio</label>
-          <input
-            type="text"
-            id="saleDescription"
-            name="saleDescription"
-            placeholder="Ej: Gaseosa 1L · Alquiler cancha completa – Daniel · Snack..."
-            autocomplete="off"
-            required
-          >
+        <!-- CERVEZAS -->
+        <div class="cerv-selector">
+          <p class="cerv-selector-label">🍺 Cervezas</p>
+          <div class="brand-row">
+            <button type="button" class="brand-btn" id="bb-Cusqueña" onclick="selectCerveza('Cusqueña')">
+              <span class="brand-btn-icon">🍺</span>
+              <span class="brand-btn-name">Cusqueña</span>
+            </button>
+            <button type="button" class="brand-btn" id="bb-Pilsen" onclick="selectCerveza('Pilsen')">
+              <span class="brand-btn-icon">🍺</span>
+              <span class="brand-btn-name">Pilsen</span>
+            </button>
+            <button type="button" class="brand-btn" id="bb-Cristal" onclick="selectCerveza('Cristal')">
+              <span class="brand-btn-icon">🍺</span>
+              <span class="brand-btn-name">Cristal</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Monto -->
-        <div class="form-group">
-          <label for="saleAmount">Monto (S/)</label>
-          <input
-            type="number"
-            id="saleAmount"
-            name="saleAmount"
-            placeholder="0.00"
-            min="0.01"
-            step="0.01"
-            required
-          >
+        <!-- CALCULADORA (aparece al seleccionar marca) -->
+        <div id="cerv-calc" class="cerv-calc hidden">
+          <div class="cerv-calc-head">
+            <span class="cerv-calc-brand-tag">🍺 <span id="cerv-calc-brand"></span></span>
+            <button type="button" class="cerv-change-btn" onclick="clearCerveza()">✕ Cambiar</button>
+          </div>
+          <div class="cerv-calc-body">
+            <div class="cerv-input-col">
+              <label>Cantidad</label>
+              <input type="number" id="cervQty" min="1" value="1" oninput="calcCerveza()">
+            </div>
+            <span class="cerv-sym">×</span>
+            <div class="cerv-input-col">
+              <label>Precio c/u</label>
+              <div class="cerv-prefix-wrap">
+                <span>S/</span>
+                <input type="number" id="cervPrice" min="0" step="0.5" placeholder="0.00" oninput="calcCerveza()">
+              </div>
+            </div>
+            <span class="cerv-sym">=</span>
+            <div class="cerv-total-col">
+              <label>Total</label>
+              <strong id="cerv-total-val">S/ 0.00</strong>
+            </div>
+          </div>
         </div>
 
-        <!-- Selector de método de pago (radio buttons grandes para tacto fácil) -->
-        <fieldset class="payment-fieldset">
-          <legend>Método de Pago</legend>
+        <!-- DIVIDER -->
+        <div id="manualDivider" class="divider"><span>o ingresá manualmente</span></div>
 
-          <div class="payment-options">
+        <!-- DESCRIPCIÓN + MONTO (modo manual) -->
+        <div id="manualBlock">
+          <div class="field-block">
+            <label class="field-label" for="saleDescription">Descripción</label>
+            <input type="text" id="saleDescription" name="saleDescription"
+              class="field-input" placeholder="Ej: Alquiler cancha — Juan" autocomplete="off">
+          </div>
+          <div class="field-block" style="margin-top:1.1rem">
+            <label class="field-label" for="saleAmount">Monto</label>
+            <div class="amount-wrap">
+              <span class="amount-prefix">S/</span>
+              <input type="number" id="saleAmount" name="saleAmount"
+                class="field-input" placeholder="0.00" min="0.01" step="0.01">
+            </div>
+          </div>
+        </div>
 
-            <label class="payment-option" for="pm-efectivo">
-              <input
-                type="radio"
-                id="pm-efectivo"
-                name="paymentMethod"
-                value="efectivo"
-              >
-              <span class="payment-option-inner">
-                <span class="payment-option-icon">💵</span>
-                <span class="payment-option-label">Efectivo</span>
-              </span>
+        <!-- inputs ocultos para modo cerveza -->
+        <input type="hidden" id="saleDescHidden">
+
+        <div class="separator"></div>
+
+        <!-- MÉTODO DE PAGO -->
+        <div class="field-block">
+          <label class="field-label">Método de pago</label>
+          <div class="payment-grid">
+
+            <label class="pay-option" for="pm-efectivo">
+              <input type="radio" id="pm-efectivo" name="paymentMethod" value="efectivo">
+              <div class="pay-inner">
+                <img src="img/sol.png" alt="Efectivo">
+                <span>Efectivo</span>
+              </div>
             </label>
 
-            <label class="payment-option" for="pm-yape">
-              <input
-                type="radio"
-                id="pm-yape"
-                name="paymentMethod"
-                value="yape"
-              >
-              <span class="payment-option-inner">
-                <span class="payment-option-icon">🔮</span>
-                <span class="payment-option-label">Yape</span>
-              </span>
+            <label class="pay-option" for="pm-yape">
+              <input type="radio" id="pm-yape" name="paymentMethod" value="yape">
+              <div class="pay-inner">
+                <img src="img/yape.png" alt="Yape">
+                <span>Yape</span>
+              </div>
             </label>
 
-            <label class="payment-option" for="pm-plin">
-              <input
-                type="radio"
-                id="pm-plin"
-                name="paymentMethod"
-                value="plin"
-              >
-              <span class="payment-option-inner">
-                <span class="payment-option-icon">📱</span>
-                <span class="payment-option-label">Plin</span>
-              </span>
+            <label class="pay-option" for="pm-plin">
+              <input type="radio" id="pm-plin" name="paymentMethod" value="plin">
+              <div class="pay-inner">
+                <img src="img/plin.png" alt="Plin">
+                <span>Plin</span>
+              </div>
             </label>
 
-            <label class="payment-option payment-option--fiado" for="pm-fiado">
-              <input
-                type="radio"
-                id="pm-fiado"
-                name="paymentMethod"
-                value="fiado"
-              >
-              <span class="payment-option-inner">
-                <span class="payment-option-icon">📋</span>
-                <span class="payment-option-label">Fiado</span>
-              </span>
+            <label class="pay-option pay-option--fiado" for="pm-fiado">
+              <input type="radio" id="pm-fiado" name="paymentMethod" value="fiado">
+              <div class="pay-inner">
+                <img src="img/deuda.png" alt="Fiado">
+                <span>Fiado</span>
+              </div>
             </label>
 
-          </div><!-- /payment-options -->
-        </fieldset>
+          </div>
+        </div>
 
-        <!-- Selector de deudor (solo visible cuando se elige "Fiado") -->
-        <!-- app.js → onPaymentMethodChange() controla la visibilidad de este bloque -->
-        <div id="debtorGroup" class="form-group hidden">
-          <label for="debtorSelect">
-            👤 Seleccionar deudor <span class="required-mark">(obligatorio para Fiado)</span>
+        <!-- DEUDOR (solo fiado) -->
+        <div id="debtorGroup" class="field-block hidden">
+          <label class="field-label" for="debtorSelect">
+            Deudor <span class="req">* obligatorio</span>
           </label>
-          <select id="debtorSelect" name="debtorSelect">
-            <option value="">— Seleccionar deudor —</option>
+          <select id="debtorSelect" name="debtorSelect" class="field-input">
+            <option value="">— Seleccioná un deudor —</option>
           </select>
-          <p class="field-hint">
-            ¿No aparece el nombre?
-            <a href="deudas.html">Regístralo primero en Fiados →</a>
-          </p>
+          <p class="hint">¿No aparece? <a href="deudas.html">Agregalo en Fiados →</a></p>
         </div>
 
-        <button type="submit" class="btn-submit">
-          ✅ Registrar Venta
-        </button>
+        <button type="submit" class="btn-registrar">Registrar venta</button>
 
       </form>
-    </section>
+    </div>
 
-    <!-- ─── LISTADO DE VENTAS RECIENTES ─── -->
-    <section class="historial-section">
-      <h3 class="section-title">Ventas Recientes</h3>
-      <!-- app.js → renderRecentSales() llena este contenedor dinámicamente -->
+    <!-- HISTORIAL -->
+    <div class="card card--history">
+      <h3 class="history-title">Ventas recientes</h3>
       <div id="recentSalesContainer" class="sales-list">
-        <p class="empty-msg">📭 Aún no hay ventas registradas.</p>
+        <p class="empty-msg">Todavía no hay ventas registradas.</p>
       </div>
-    </section>
+    </div>
 
   </main>
 
